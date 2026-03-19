@@ -29,8 +29,8 @@ Predict whether a borrower will default within two years (`SeriousDlqin2yrs`).
 
 ## Results
 
-* Best Model: Gradient Boosting
-* ROC-AUC: ~0.85
+* Best Model: XGB
+* ROC-AUC: ~0.86
 
 ## Key Risk Drivers
 
@@ -57,7 +57,7 @@ pip install -r requirements.txt
 ## Future Improvements
 
 * Add SHAP explainability
-* Hyperparameter tuning
+* Precision-recall tradeoff
 * Threshold optimization
 
 ## Author
