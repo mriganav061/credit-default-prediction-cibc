@@ -1,13 +1,65 @@
-# credit-default-prediction-cibc
+# Credit Default Prediction Model
 
-Project Overview:
-This project focuses on building a predictive model to estimate the probability of credit default for a new credit product. The objective is to support decision-making on whether a client should be granted credit, while balancing revenue optimization and risk minimization.
+## Overview
 
-Objectives:
+This project builds a machine learning model to predict the probability of credit default using borrower financial data. The goal is to support better credit risk decisions.
 
-The project aims to:
-1.Develop a predictive model to identify customers likely to default
-2.Optimize the trade-off between credit risk and revenue generation
-3.Perform model and variable selection with clear justification
-4.Provide both global and local explanations of model predictions
-5.Generate probability of default (PD) for unseen customers
+## Problem Statement
+
+Predict whether a borrower will default within two years (`SeriousDlqin2yrs`).
+
+## Dataset
+
+* Training: ~150,000 records
+* Test: ~100,000 records
+* Target: SeriousDlqin2yrs
+
+## Approach
+
+* Missing value imputation (median)
+* Model comparison:
+
+  * Logistic Regression
+  * Random Forest
+  * Gradient Boosting
+
+## Evaluation
+
+* Metric: ROC-AUC (handles class imbalance)
+
+## Results
+
+* Best Model: Gradient Boosting
+* ROC-AUC: ~0.85
+
+## Key Risk Drivers
+
+* Past due payments (30/60/90 days)
+* Credit utilization
+* Debt ratio
+* Age
+
+## Business Impact
+
+* Reduces loan defaults
+* Enables risk-based pricing
+* Improves approval decisions
+
+## Output
+
+Predictions saved in:
+outputs/test_probabilities.csv
+
+## How to Run
+
+pip install -r requirements.txt
+
+## Future Improvements
+
+* Add SHAP explainability
+* Hyperparameter tuning
+* Threshold optimization
+
+## Author
+
+Mriganav Das
