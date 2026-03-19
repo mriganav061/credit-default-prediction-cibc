@@ -2,6 +2,8 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
 
 def load_data(train_path, test_path):
     """
@@ -48,13 +50,13 @@ def split_data(train):
         X, y, test_size=0.2, stratify=y, random_state=42
     )
 
-
 def build_preprocessor(X):
     """
     Create preprocessing pipeline for numeric features.
 
-    Currently:
+    Steps:
     - Handles missing values using median imputation
+    - Scales features using StandardScaler
 
     Parameters:
         X (DataFrame): Feature dataset
@@ -66,10 +68,15 @@ def build_preprocessor(X):
     # All features are numeric in this dataset
     numeric_features = X.columns
 
-    # Median imputation is robust for skewed financial data
-    numeric_transformer = SimpleImputer(strategy="median")
+    # Pipeline: Imputation → Scaling
+    numeric_transformer = Pipeline(
+        steps=[
+            ("imputer", SimpleImputer(strategy="median")),
+            ("scaler", StandardScaler()),
+        ]
+    )
 
-    # ColumnTransformer ensures scalability for future feature types
+    # Apply transformation to numeric columns
     preprocessor = ColumnTransformer(
         transformers=[
             ("num", numeric_transformer, numeric_features)
